@@ -97,13 +97,14 @@ export const DishCard: React.FC<DishCardProps> = ({ dish }) => {
 
         {/* Real photo if available */}
         {dish.image && (
-          <div className="mb-3 rounded-[8px] overflow-hidden border border-wheat/60 bg-paper">
+          <div className="mb-3 rounded-[8px] overflow-hidden border border-wheat/60 bg-paper aspect-video">
             <ImageWithFallback
               src={dish.image}
               alt={dish.name}
               aspectRatio="video"
               fallbackText={dish.name}
-              className="rounded-[8px] object-cover w-full group-hover:scale-[1.02] transition-transform duration-300"
+              category={dish.category}
+              className="rounded-[8px] object-cover w-full h-full group-hover:scale-[1.02] transition-transform duration-300"
             />
           </div>
         )}

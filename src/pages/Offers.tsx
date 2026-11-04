@@ -105,6 +105,7 @@ export const Offers: React.FC = () => {
                   src={RESTAURANT_IMAGES.offerBanner20Off.src}
                   alt={RESTAURANT_IMAGES.offerBanner20Off.alt}
                   aspectRatio="portrait"
+                  category="brand"
                   className="w-full h-full object-cover"
                 />
               </div>

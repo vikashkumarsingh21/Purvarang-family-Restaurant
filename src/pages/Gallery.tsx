@@ -6,7 +6,7 @@ import {
   ChevronRight,
   Maximize2
 } from 'lucide-react';
-import { GALLERY_ITEMS, ImageAsset } from '../data/images';
+import { GALLERY_ITEMS, ImageAsset, getImageUrl } from '../data/images';
 import { ImageWithFallback } from '../components/common/ImageWithFallback';
 
 export const Gallery: React.FC = () => {
@@ -94,12 +94,17 @@ export const Gallery: React.FC = () => {
             onClick={() => setLightboxIndex(idx)}
             className="group break-inside-avoid p-3 bg-white rounded-[16px] border border-wheat shadow-soft cursor-pointer transition-all duration-300 hover:border-clay/40 hover:-translate-y-0.5"
           >
-            <div className="rounded-[10px] overflow-hidden bg-paper">
+            <div className={`rounded-[10px] overflow-hidden bg-paper ${
+              item.aspectRatio === 'wide' ? 'aspect-video' :
+              item.aspectRatio === 'portrait' ? 'aspect-[3/4]' :
+              item.aspectRatio === 'square' ? 'aspect-square' : 'aspect-[4/3]'
+            }`}>
               <ImageWithFallback
                 src={item.src}
                 alt={item.alt}
-                aspectRatio="auto"
-                className="w-full h-auto object-cover group-hover:scale-[1.02] transition-transform duration-300"
+                aspectRatio={item.aspectRatio || 'square'}
+                category={item.category}
+                className="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-300"
               />
             </div>
 
@@ -162,9 +167,9 @@ export const Gallery: React.FC = () => {
             className="max-w-4xl max-h-[85vh] bg-white p-3 rounded-[16px] border border-wheat shadow-soft flex flex-col justify-between"
             onClick={e => e.stopPropagation()}
           >
-            <div className="max-h-[70vh] overflow-hidden rounded-[10px] bg-paper flex items-center justify-center">
+            <div className="max-h-[70vh] min-h-[300px] overflow-hidden rounded-[10px] bg-paper flex items-center justify-center">
               <img
-                src={activeImage.src}
+                src={getImageUrl(activeImage.src)}
                 alt={activeImage.alt}
                 className="max-w-full max-h-[70vh] object-contain rounded-[8px]"
               />

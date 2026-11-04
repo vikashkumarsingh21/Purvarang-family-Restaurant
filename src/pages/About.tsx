@@ -47,6 +47,7 @@ export const About: React.FC = () => {
                     src={RESTAURANT_IMAGES.ownerGreeting.src}
                     alt={RESTAURANT_IMAGES.ownerGreeting.alt}
                     aspectRatio="portrait"
+                    category="team"
                     className="w-full h-full object-cover"
                   />
                 </div>
@@ -171,6 +172,7 @@ export const About: React.FC = () => {
                   src={RESTAURANT_IMAGES.managerBarCounter.src}
                   alt={RESTAURANT_IMAGES.managerBarCounter.alt}
                   aspectRatio="portrait"
+                  category="team"
                   className="w-full h-full object-cover"
                 />
               </div>
@@ -189,6 +191,7 @@ export const About: React.FC = () => {
                   src={RESTAURANT_IMAGES.banquetTeamBanner.src}
                   alt={RESTAURANT_IMAGES.banquetTeamBanner.alt}
                   aspectRatio="square"
+                  category="team"
                   className="w-full h-full object-cover"
                 />
               </div>
@@ -207,6 +210,7 @@ export const About: React.FC = () => {
                   src={RESTAURANT_IMAGES.serviceKitchenTeam.src}
                   alt={RESTAURANT_IMAGES.serviceKitchenTeam.alt}
                   aspectRatio="square"
+                  category="team"
                   className="w-full h-full object-cover"
                 />
               </div>

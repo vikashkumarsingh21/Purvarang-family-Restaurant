@@ -100,9 +100,11 @@ export const Home: React.FC = () => {
                 {/* Main Photo Frame */}
                 <div className="relative bg-white p-3 rounded-[16px] border border-wheat shadow-soft">
                   <div className="aspect-[4/3] sm:aspect-square overflow-hidden rounded-[12px] bg-paper">
-                    <img
+                    <ImageWithFallback
                       src={RESTAURANT_IMAGES.heroDining.src}
                       alt={RESTAURANT_IMAGES.heroDining.alt}
+                      aspectRatio="4/3"
+                      category="interior"
                       className="w-full h-full object-cover"
                     />
                   </div>
@@ -192,6 +194,7 @@ export const Home: React.FC = () => {
                       src={RESTAURANT_IMAGES.heroBannerDish.src}
                       alt={RESTAURANT_IMAGES.heroBannerDish.alt}
                       aspectRatio="4/3"
+                      category="food"
                       className="w-full h-full object-cover"
                     />
                   </div>
@@ -366,6 +369,7 @@ export const Home: React.FC = () => {
                     src={CATEGORY_COVERS[cat.id] || cat.image}
                     alt={cat.name}
                     aspectRatio="square"
+                    category={cat.name}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                   />
                 </div>
