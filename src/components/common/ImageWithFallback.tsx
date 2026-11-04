@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { UtensilsCrossed } from 'lucide-react';
 import { getImageUrl } from '../../data/images';
 
@@ -19,7 +19,7 @@ export const ImageWithFallback: React.FC<ImageWithFallbackProps> = ({
   photoFrame = false,
   ...props
 }) => {
-  const imgRef = useRef<HTMLImageElement>(null);
+  const imgRef = useRef<HTMLImageElement | null>(null);
   const [loaded, setLoaded] = useState(false);
   const [error, setError] = useState(!src);
 
@@ -58,6 +58,19 @@ export const ImageWithFallback: React.FC<ImageWithFallbackProps> = ({
     return () => clearTimeout(timer);
   }, [src, resolvedSrc]);
 
+  // Ref callback to capture immediately-cached images upon DOM mount
+  const setImgRef = useCallback((node: HTMLImageElement | null) => {
+    imgRef.current = node;
+    if (node && node.complete) {
+      if (node.naturalWidth > 0) {
+        setLoaded(true);
+      } else if (node.naturalWidth === 0 && node.src) {
+        setError(true);
+        setLoaded(true);
+      }
+    }
+  }, []);
+
   const ratioClasses = {
     square: 'aspect-square',
     video: 'aspect-video',
@@ -78,7 +91,7 @@ export const ImageWithFallback: React.FC<ImageWithFallbackProps> = ({
           <UtensilsCrossed className="w-5 h-5 stroke-[1.75]" />
         </div>
         <p className="text-[14px] font-serif text-espresso font-semibold">
-          {fallbackText || alt || 'Purvarang Specialty'}
+          {fallbackText || alt || (category ? `${category} Specialty` : 'Purvarang Specialty')}
         </p>
         {category && (
           <span className="inline-block mt-1 px-2.5 py-0.5 rounded-full text-[11px] font-medium uppercase tracking-wider bg-cream border border-wheat text-mirchi">
@@ -100,7 +113,7 @@ export const ImageWithFallback: React.FC<ImageWithFallbackProps> = ({
         </div>
       )}
       <img
-        ref={imgRef}
+        ref={setImgRef}
         src={resolvedSrc}
         alt={alt || "Purvarang Restaurant"}
         loading="lazy"

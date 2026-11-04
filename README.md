@@ -108,5 +108,32 @@ To plug in a real backend (Node.js, Express, Firebase, Supabase, or PostgreSQL):
 
 ---
 
+## Deploy to Render
+
+To deploy this project to Render as a **Static Site**:
+
+1. **Create Static Site on Render**:
+   - Connect your GitHub repository to Render.
+   - Choose **Static Site**.
+
+2. **Configure Settings**:
+   - **Name**: `purvarang-restaurant`
+   - **Branch**: `main`
+   - **Build Command**: `npm ci && npm run build`
+   - **Publish Directory**: `dist`
+
+3. **Environment Variables**:
+   - Add `NODE_VERSION` with value `22` (or let Render read `.node-version` / `render.yaml`).
+
+4. **Redirects / Rewrites (SPA Routing)**:
+   - Type: `Rewrite`
+   - Source: `/*`
+   - Destination: `/index.html`
+
+> [!NOTE]
+> The included `render.yaml` automatically specifies these settings, including the build command, static publish path, Node.js version, and SPA rewrite rules.
+
+---
+
 ## License & Ownership
 Created exclusively for Purvarang Family Restaurant, Lalganj, Vaishali, Bihar.
